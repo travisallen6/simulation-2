@@ -1,36 +1,3 @@
-/* .dashboard-container {
-  width: 100%;
-  height: 100vh;
-  display:flex;
-  justify-content:center;
-}
-
-.dashboard-page {
-  width: 60vw;
-  height: 100vh;
-  background-color: #E2F0EA;
-  display:flex;
-  flex-direction: column;
-  align-items:center;
-}
-
-.dashboard-add-property-btn {
-  width: 150px;
-  height: 40px;
-  background-color: greenyellow;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  float:right;
-}
-
-.property-container {
-  width: 400px;
-  height: 150px;
-  background-color:gray;
-  padding: 20
-} */
-
 
 
 .wizard-container {
@@ -55,3 +22,26 @@
   justify-content: center;
   float:right;
 }
+
+.wizard-submit-btn {
+  width: 150px;
+  height: 40px;
+  background-color: Green;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  float:right;
+}
+
+.next-btn {
+  width: 150px;
+  height: 50px;
+  background-color: blue;
+}
+
+.last-btn {
+  width: 150px;
+  height: 50px;
+  background-color: yellow;
+}
+

@@ -1,53 +1,15 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Route, Switch } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { clearInputs } from '../../ducks/reducer'
 import './Wizard.css'
+import Wiz1 from './Wiz1'
+import Wiz2 from './Wiz2'
+import Wiz3 from './Wiz3'
 
-export default class Wizard extends Component{
-  constructor(props){
-    super(props)
-    this.state = {
-      name: '',
-      address: '',
-      city: '',
-      stateName: '',
-      zip: '',
-      redirect: false
-    }
-  }
-
-  updateName(name){
-    this.setState( {name : name } )
-  }
-
-  updateAddress(address){
-    this.setState( {address : address } )
-  }
-
-  updateCity(city){
-    this.setState( {city : city } )
-  }
-
-  updateStateName(stateName){
-    this.setState( {stateName : stateName } )
-  }
-
-  updateZip(zip){
-    this.setState( {zip : zip } )
-  }
-
-  addProperty(){
-    let { name, address, city, stateName, zip } = this.state 
-    axios.post('/api', { propertyname: name, address, city, state: stateName, zip })
-    .then(  )
-  }
+class Wizard extends Component{
 
   render(){
-
-    const { redirect } = this.state;
-
-    if(redirect) {
-      return <Redirect to=
-    }
 
     return(
       <div className='wizard-container'>
@@ -56,34 +18,36 @@ export default class Wizard extends Component{
         <Link to='/'>
           <div 
             className='wizard-cancel-btn'
+            onClick={()=>this.props.clearInputs()}
             >
             Cancel
           </div>
         </Link>
-        <div className='wizard-form-container'>
-          <div className='wizard-form-input-container'>
-            <h1> Name </h1>
-            <input value={this.state.name} onChange={ (e)=>this.updateName(e.target.value) }  />
-          </div>
-          <div className='wizard-form-input-container'>
-            <h1> Address </h1>
-            <input value={this.state.address} onChange={ (e)=>this.updateAddress(e.target.value) }  />
-          </div>
-          <div className='wizard-form-input-container'>
-            <h1> City </h1>
-            <input value={this.state.city} onChange={ (e)=>this.updateCity(e.target.value) }  />
-          </div>
-          <div className='wizard-form-input-container'>
-            <h1> State </h1>
-            <input value={this.state.stateName} onChange={ (e)=>this.updateStateName(e.target.value) }  />
-          </div>
-          <div className='wizard-form-input-container'>
-            <h1> Zip </h1>
-            <input value={this.state.zip} onChange={ (e)=>this.updateZip(e.target.value) }  />
-          </div>
-        </div>
+        <Switch>
+          <Route component={Wiz1} exact path='/wizard'/>
+          <Route component={Wiz2} path='/wizard/pg2'/>
+          <Route component={Wiz3} path='/wizard/pg3' />
+        </Switch>
       </div>
+
+
     </div>
     )
   }
 }
+
+function mapStateToProps(state){
+    let { name, address, city, stateName, zip, imageUrl, mortgage, desiredRent } = state
+  return {
+    name,
+    address,
+    city,
+    stateName,
+    zip,
+    imageUrl,
+    mortgage,
+    desiredRent
+  }
+}
+
+export default connect(mapStateToProps, {clearInputs})(Wizard) 

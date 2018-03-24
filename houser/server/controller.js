@@ -9,11 +9,18 @@ module.exports = {
   },
 
   postProperty: (req, res, next) => {
-    let { propertyname, address, city, state, zip } = req.body
-    req.app.get('db').post_property( [propertyname, address, city, state, zip ] )
+    let { propertyname, address, city, state, zip, image, mortgageamt, desiredrent } = req.body
+    req.app.get('db').post_property( [propertyname, address, city, state, zip, image, mortgageamt, desiredrent ] )
     .then( () => res.sendStatus(200) )
-    }
+  },
+
+  deleteProperty: (req, res, next) => {
+    req.app.get('db').delete_property( req.params.id )
+    .then( req.app.get('db').get_properties )
+
   }
+
+}
 
     // const db = req.app.get('db')
     // let { name, description, price, imageurl } = req.body

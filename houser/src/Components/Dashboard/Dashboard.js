@@ -25,25 +25,39 @@ export default class Dashboard extends Component{
           // }
         ]
     }
+
+    this.propertyUpdate = this.propertyUpdate.bind(this)
   }
+
 
 
   componentDidMount(){
     axios.get('/api/').then( res =>{
+      console.log(res)
       this.setState({properties: res.data})
     } )
+  }
+
+  propertyUpdate(res){
+    this.setState({properties: res.data})
   }
   
 
   render(){
     let propertiesDisplay = this.state.properties.map( (property, i) => {
       return (
-      <House 
+      <House
+        propertyUpdate={this.propertyUpdate}
+        key={property.propertyid}
+        propertyid={property.propertyid}
         propertyname={property.propertyname}
         address={property.address} 
         city={property.city} 
         state={property.state} 
-        zip={property.zip} 
+        zip={property.zip}
+        imageUrl={property.image}
+        mortgage={property.mortgageamt}
+        desiredRent={property.desiredrent} 
       />
       )}
     )

@@ -21,6 +21,8 @@ app.get('/api/', ctrl.getProperties)
 
 app.post('/api/', ctrl.postProperty)
 
+app.delete('/api/:id', ctrl.deleteProperty)
+
 
 
 
